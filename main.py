@@ -8,8 +8,8 @@ import os
 
 load_dotenv()
 
-username = os.getenv("USERNAME")
-password = os.getenv("PASSWORD")
+username = os.getenv("USERNAME", None)
+password = os.getenv("PASSWORD", None)
 
 # Get airport data
 df = pd.read_csv("world-airports.csv")
