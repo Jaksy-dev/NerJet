@@ -16,8 +16,14 @@ df = pd.read_csv("world-airports.csv")
 
 api = OpenSkyApi(username,password)
 
-ner_jets= ["440241", "440d18","440214", "440b18", "4401d7"]
-# OE-LOT, OE-HUG, OE-HOZ, OE-XWY, OE-LEM 
+ner_jets= [
+            "440241", #OE-LOT,
+            "440d18", #OE-HUG
+            "440214", #OE-HOZ,
+            "440b18", #OE-XWY
+            "4401d7" #OE-LEM 
+            ]
+
 
 for icao in ner_jets:
     data = api.get_flights_by_aircraft(icao,floor(time()) - 2592000, floor(time())-2000)
@@ -63,7 +69,5 @@ for icao in ner_jets:
             lday = gmtime(flight.lastSeen).tm_mday
             lhour = gmtime(flight.lastSeen).tm_hour
             lmin = gmtime(flight.lastSeen).tm_min
-
-            
 
             print(f"Aircraft: {icao}\nCallsign: {callsign}\nFirst seen: {fyear}.{fmon}.{fday} {fhour}:{fmin} GMT\nDeparture: {dep_name}, {dep_country}, {dep_region}, {dep_municipality}\nLast seen: {lyear}.{lmon}.{lday} {lhour}:{lmin} GMT\nArrival: {arr_name}, {arr_country}, {arr_region}, {arr_municipality}\n")
